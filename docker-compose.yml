@@ -1,0 +1,19 @@
+version: "2"
+services:
+  challenge-app:
+    container_name: challenge-app
+    restart: always
+    build: .
+    ports:
+      - "49160:3000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - "./data/mongo:/data/db"
+    ports:
+      - "27017:27017"
